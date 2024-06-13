@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KarapinhaModel
 {
-    [Table("Professionais")]
+    [Table("Professionals")]
     public class ProfessionalModel
     {
         [Key]
