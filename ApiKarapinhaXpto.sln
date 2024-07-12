@@ -5,9 +5,15 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiKarapinhaXpto", "ApiKarapinhaXpto\ApiKarapinhaXpto.csproj", "{2508844E-3D80-406A-A263-EB0641DE71F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarapinhaModel", "KarapinhaModel\KarapinhaModel.csproj", "{C4C450D7-A0AE-4773-83FA-76F81AEAF3C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Karapinha.Model", "KarapinhaModel\Karapinha.Model.csproj", "{C4C450D7-A0AE-4773-83FA-76F81AEAF3C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarapinhaDAL", "KarapinhaDAL\KarapinhaDAL.csproj", "{3DAD40AF-DCCF-4318-91B6-11AA933E69AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Karapinha.DAL", "KarapinhaDAL\Karapinha.DAL.csproj", "{3DAD40AF-DCCF-4318-91B6-11AA933E69AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Karapinha.DTO", "KarapinhaDTO\Karapinha.DTO.csproj", "{91AB8F55-F7CC-4739-BBD2-FAF389E18495}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Karapinha.Shared", "KarapinhaShared\Karapinha.Shared.csproj", "{12D4B04F-92AD-42F2-B14F-AC2C6358E982}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kapainha.Services", "Kapainha.Services\Kapainha.Services.csproj", "{30B998EB-174B-4518-8F94-5FDC4ABF72ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +33,18 @@ Global
 		{3DAD40AF-DCCF-4318-91B6-11AA933E69AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DAD40AF-DCCF-4318-91B6-11AA933E69AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DAD40AF-DCCF-4318-91B6-11AA933E69AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91AB8F55-F7CC-4739-BBD2-FAF389E18495}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91AB8F55-F7CC-4739-BBD2-FAF389E18495}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91AB8F55-F7CC-4739-BBD2-FAF389E18495}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91AB8F55-F7CC-4739-BBD2-FAF389E18495}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12D4B04F-92AD-42F2-B14F-AC2C6358E982}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12D4B04F-92AD-42F2-B14F-AC2C6358E982}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12D4B04F-92AD-42F2-B14F-AC2C6358E982}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12D4B04F-92AD-42F2-B14F-AC2C6358E982}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30B998EB-174B-4518-8F94-5FDC4ABF72ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30B998EB-174B-4518-8F94-5FDC4ABF72ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30B998EB-174B-4518-8F94-5FDC4ABF72ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30B998EB-174B-4518-8F94-5FDC4ABF72ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
