@@ -13,6 +13,7 @@ namespace KarapinhaDAL
         public AppDbContext()
             : base("name=MyConnection")
         {
+
             this.Configuration.ProxyCreationEnabled = false;
             this.Configuration.AutoDetectChangesEnabled = false;
         }
@@ -26,7 +27,7 @@ namespace KarapinhaDAL
         public DbSet<BookingServiceModel> BookingServices { get; set; }
         public DbSet<CategoryModel> Categories { get; set; }
         public DbSet<ProfessionalModel> Professionals { get; set;}
-        public DbSet<ProfessionalTimeModel> professionalTimes { get; set; }
+        public DbSet<ProfessionalTimeModel> ProfessionalTimes { get; set; }
         public DbSet<ServiceModel> Services { get; set; }
         public DbSet<TimeModel> Times { get; set; }
         public DbSet<UserModel> Users { get; set; }
