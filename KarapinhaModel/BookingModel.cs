@@ -15,6 +15,7 @@ namespace KarapinhaModel
         public int BookingId { get; set; }
         public decimal Price { get; set; }
         public int UserId { get; set; }
+        public string Status { get; set; }
 
         [ForeignKey("UserId")]
         public virtual UserModel User { get; set; }
