@@ -2,6 +2,7 @@
 using KarapinhaDTO.Category;
 using KarapinhaDTO.Time;
 using KarapinhaDTO.User;
+using KarapinhaShared.Exceptions;
 using KarapinhaShared.Services;
 using System;
 using System.Collections.Generic;
@@ -110,6 +111,10 @@ namespace ApiKarapinhaXpto.Api
                     _userService.CreateUser(userCreateDto);
 
                     return Ok(new { message = "Utilizador criado com sucesso", user = userCreateDto });
+                }
+                catch (UserAlreadyExistsException)
+                {
+                    return Conflict();
                 }
                 catch (Exception ex)
                 {
