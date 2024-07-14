@@ -4,6 +4,7 @@ using KarapinhaDAL.Repositories;
 using KarapinhaDTO.Category;
 using KarapinhaDTO.Professional;
 using KarapinhaDTO.User;
+using KarapinhaShared.Exceptions;
 using KarapinhaShared.Services;
 using System;
 using System.Collections.Generic;
@@ -52,6 +53,12 @@ namespace Kapainha.Services
         {
             userCreateDto.Password = BCrypt.Net.BCrypt.HashPassword(userCreateDto.Password);
             var user = UserMappers.CreateToUser(userCreateDto);
+
+            if (UserExists(user.EmailAdress, user.Username))
+            {
+                throw new UserAlreadyExistsException("Um usuário com este e-mail já existe.");
+            }
+
             try
             {
                 _repository.Add(user);
@@ -65,15 +72,24 @@ namespace Kapainha.Services
                 {
                     _emailService.EnviarEmailCredenciaisAdmin(userCreateDto);
                 }
-
-
              
             }
             catch (Exception ex)
             {
                 throw new Exception("Mensagem de erro específica", ex);
             }
-            
+
+        }
+
+        private bool UserExists(string email, string username)
+        {
+            var user = _repository.GetByEmail(email);
+            if (user == null)
+            {
+                user = _repository.GetByUsername(username);
+                if (user == null) { return false; }
+            }
+            return true;
         }
 
         public void DeleteUser(int id)
