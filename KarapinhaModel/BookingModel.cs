@@ -14,7 +14,9 @@ namespace KarapinhaModel
         [Key]
         public int BookingId { get; set; }
         public decimal Price { get; set; }
+        public DateTime ActivationDate { get; set; }
         public int UserId { get; set; }
+
         public string Status { get; set; }
 
         [ForeignKey("UserId")]

@@ -79,23 +79,23 @@ namespace KarapinhaDAL.Repositories
         {
             context.Bookings.Attach(booking);
             context.Entry(booking).Property(b => b.Status).IsModified = true;
+            context.Entry(booking).Property(b => b.ActivationDate).IsModified = true;
         }
 
         public decimal GetRevenueForDay(DateTime day)
         {
             var truncatedDay = day.Date;
+
             return context.Bookings
-                          .Where(x => x.Services.Any(s => DbFunctions.TruncateTime(s.Date) == truncatedDay))
-                          .SelectMany(x => x.Services)
-                          .Where(s => DbFunctions.TruncateTime(s.Date) == truncatedDay)
-                          .Sum(s => (decimal?)s.Service.Price) ?? 0;
+                          .Where(x => DbFunctions.TruncateTime(x.ActivationDate) == truncatedDay && x.Status == "active")
+                          .Sum(x => (decimal?)x.Price) ?? 0;
         }
 
 
         public decimal GetRevenueForMonth(int month, int year)
         {
             return context.Bookings
-                          .Where(x => x.Services.Any(y => y.Date.Month == month && y.Date.Year == year))
+                          .Where(x => x.ActivationDate.Month == month && x.ActivationDate.Year == year && x.Status == "active")
                           .Sum(x => (decimal?)x.Price) ?? 0;
         }
 

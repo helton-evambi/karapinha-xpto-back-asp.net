@@ -64,6 +64,10 @@
     <Compile Include="Migrations\202406272356473_AddStatusProprietyToBooking.Designer.cs">
       <DependentUpon>202406272356473_AddStatusProprietyToBooking.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202407121544210_AddActicationDate.cs" />
+    <Compile Include="Migrations\202407121544210_AddActicationDate.Designer.cs">
+      <DependentUpon>202407121544210_AddActicationDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BookingRepository.cs" />
@@ -98,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202406272356473_AddStatusProprietyToBooking.resx">
       <DependentUpon>202406272356473_AddStatusProprietyToBooking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202407121544210_AddActicationDate.resx">
+      <DependentUpon>202407121544210_AddActicationDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

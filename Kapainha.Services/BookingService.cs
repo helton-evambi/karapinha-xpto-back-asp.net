@@ -41,7 +41,7 @@ namespace Kapainha.Services
         public void CreateBooking(BookingCreateDto bookingCreateDto)
         {
             var booking = BookingMappers.CreateToBooking(bookingCreateDto);
-            _repository.Add(booking);
+            booking.ActivationDate = DateTime.Now.Date;
             _repository.Save();
         }
 
@@ -97,7 +97,7 @@ namespace Kapainha.Services
         {
             var existingBooking = _repository.GetById(id) ?? throw new KeyNotFoundException("User not found");
             existingBooking.Status = status;
-
+            existingBooking.ActivationDate = DateTime.Now.Date;
             _repository.UpdatingSatus(existingBooking);
             _repository.Save();
         }
