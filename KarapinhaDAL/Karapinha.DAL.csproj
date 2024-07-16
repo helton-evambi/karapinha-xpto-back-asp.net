@@ -52,21 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppDbContext.cs" />
-    <Compile Include="Migrations\202406131655047_FirstMigration.cs" />
-    <Compile Include="Migrations\202406131655047_FirstMigration.Designer.cs">
-      <DependentUpon>202406131655047_FirstMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202406152103138_AddNewPropertyToModel.cs" />
-    <Compile Include="Migrations\202406152103138_AddNewPropertyToModel.Designer.cs">
-      <DependentUpon>202406152103138_AddNewPropertyToModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202406272356473_AddStatusProprietyToBooking.cs" />
-    <Compile Include="Migrations\202406272356473_AddStatusProprietyToBooking.Designer.cs">
-      <DependentUpon>202406272356473_AddStatusProprietyToBooking.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202407121544210_AddActicationDate.cs" />
-    <Compile Include="Migrations\202407121544210_AddActicationDate.Designer.cs">
-      <DependentUpon>202407121544210_AddActicationDate.cs</DependentUpon>
+    <Compile Include="Migrations\202407151434045_first.cs" />
+    <Compile Include="Migrations\202407151434045_first.Designer.cs">
+      <DependentUpon>202407151434045_first.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,17 +82,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202406131655047_FirstMigration.resx">
-      <DependentUpon>202406131655047_FirstMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202406152103138_AddNewPropertyToModel.resx">
-      <DependentUpon>202406152103138_AddNewPropertyToModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202406272356473_AddStatusProprietyToBooking.resx">
-      <DependentUpon>202406272356473_AddStatusProprietyToBooking.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202407121544210_AddActicationDate.resx">
-      <DependentUpon>202407121544210_AddActicationDate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202407151434045_first.resx">
+      <DependentUpon>202407151434045_first.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

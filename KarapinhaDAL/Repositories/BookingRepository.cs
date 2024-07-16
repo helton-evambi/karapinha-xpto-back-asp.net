@@ -61,17 +61,52 @@ namespace KarapinhaDAL.Repositories
             context.Bookings.Remove(booking);
         }
 
-        public void Update(BookingModel booking)
+        public void Update(BookingModel updatedBooking)
         {
             var existingBooking = context.Bookings
-                        .Include(x => x.Services)
-                        .FirstOrDefault(x => x.BookingId == booking.BookingId);
-            if (existingBooking != null)
+                .Include(b => b.Services)
+                .FirstOrDefault(b => b.BookingId == updatedBooking.BookingId);
+
+            if (existingBooking == null)
+                throw new KeyNotFoundException($"Booking with id {updatedBooking.BookingId} not found.");
+
+            // Atualizar propriedades simples
+            context.Entry(existingBooking).CurrentValues.SetValues(updatedBooking);
+
+            // Remover serviços que não existem mais no booking atualizado
+            var servicesToRemove = existingBooking.Services
+                .Where(es => !updatedBooking.Services.Any(us =>
+                    us.ServiceId == es.ServiceId &&
+                    us.ProfessionalId == es.ProfessionalId &&
+                    us.TimeId == es.TimeId))
+                .ToList();
+
+            foreach (var serviceToRemove in servicesToRemove)
             {
-                context.Entry(existingBooking).State = EntityState.Detached;
+                existingBooking.Services.Remove(serviceToRemove);
             }
-            context.Bookings.Attach(booking);
-            context.Entry(booking).State = EntityState.Modified;
+
+            // Atualizar ou adicionar serviços
+            foreach (var updatedService in updatedBooking.Services)
+            {
+                var existingService = existingBooking.Services.FirstOrDefault(es =>
+                    es.ServiceId == updatedService.ServiceId &&
+                    es.ProfessionalId == updatedService.ProfessionalId &&
+                    es.TimeId == updatedService.TimeId);
+
+                if (existingService == null)
+                {
+                    // Adicionar novo serviço
+                    existingBooking.Services.Add(updatedService);
+                }
+                else
+                {
+                    // Atualizar serviço existente
+                    existingService.Date = updatedService.Date;
+                    // Atualizar outras propriedades conforme necessário
+                }
+            }
+
             context.SaveChanges();
         }
 
