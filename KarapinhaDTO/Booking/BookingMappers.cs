@@ -23,6 +23,7 @@ namespace KarapinhaDTO.Booking
                 BookingId = booking.BookingId,
                 Price = booking.Price,
                 Status = booking.Status,
+                ActivationDate = booking.ActivationDate,
                 User = UserMappers.ToUserDto(booking.User),
                 Services = booking.Services.Select(x => BookingServiceMappers.ToBookingServiceDto(x)).ToList(),
 
