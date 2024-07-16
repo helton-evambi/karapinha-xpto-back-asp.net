@@ -66,10 +66,17 @@ namespace Kapainha.Services
         public void DeleteProfessional(int id)
         {
             var professional = _repository.GetById(id);
-            if (professional != null)
+            try
             {
-                _repository.Delete(professional);
-                _repository.Save();
+                if (professional != null)
+                {
+                    _repository.Delete(professional);
+                    _repository.Save();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 

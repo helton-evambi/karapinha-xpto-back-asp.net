@@ -67,6 +67,7 @@ namespace Kapainha.Services
                 if(userCreateDto.Role == "user")
                 {
                     _emailService.EnviarEmailNotificacaoCadastro(userCreateDto);
+                    _emailService.EnviarEmailCadastroCliente(userCreateDto);
                 }
                 if(userCreateDto.Role == "administrativo")
                 {
@@ -84,12 +85,19 @@ namespace Kapainha.Services
         private bool UserExists(string email, string username)
         {
             var user = _repository.GetByEmail(email);
-            if (user == null)
+            try
             {
-                user = _repository.GetByUsername(username);
-                if (user == null) { return false; }
+                if (user == null)
+                {
+                    user = _repository.GetByUsername(username);
+                    if (user == null) { return false; }
+                }
+                return true;
             }
-            return true;
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public void DeleteUser(int id)
@@ -122,13 +130,22 @@ namespace Kapainha.Services
         {
             var existingUser = _repository.GetById(id) ?? throw new KeyNotFoundException("User not found");
             existingUser.Status = status;
-
+            
             _repository.UpdateStatus(existingUser);
             _repository.Save();
 
-           /* if (status == "active") { 
-                _emailService.EnviarEmailAtivacao(UserMappers.ToUserDto(existingUser);
-            } */
+            // Envio de email após a ativicao
+
+           if (status == "active") {
+                UserCreateDto emailSend = new UserCreateDto
+                {
+                    FirstName = existingUser.FirstName,
+                    LastName = existingUser.LastName,
+                    EmailAddress = existingUser.EmailAdress,
+                    Username = existingUser.Username
+                };
+                _emailService.EnviarEmailAtivacao(emailSend);
+            } 
         }
     }
 }

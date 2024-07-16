@@ -59,11 +59,19 @@ namespace Kapainha.Services
         public void DeleteCategory(int id)
         {
             var category = _repository.GetById(id);
-            if (category != null)
+            try
             {
-                _repository.Delete(category);
-                _repository.Save();
+                if (category != null)
+                {
+                    _repository.Delete(category);
+                    _repository.Save();
+                }
             }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
         }
     }
 }

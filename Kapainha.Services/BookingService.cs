@@ -1,5 +1,6 @@
 ﻿using KarapinhaDAL.Repositories;
 using KarapinhaDTO.Booking;
+using KarapinhaDTO.BookingService;
 using KarapinhaDTO.Category;
 using KarapinhaShared.Repositories;
 using KarapinhaShared.Services;
@@ -42,17 +43,25 @@ namespace Kapainha.Services
         {
             var booking = BookingMappers.CreateToBooking(bookingCreateDto);
             booking.ActivationDate = DateTime.Now.Date;
+            _repository.Add(booking);
             _repository.Save();
         }
 
         public void DeleteBooking(int id)
         {
             var booking = _repository.GetById(id);
-            if (booking != null)
+            try
             {
-                _repository.Delete(booking);
-                _repository.Save();
+                if (booking != null)
+                {
+                    _repository.Delete(booking);
+                    _repository.Save();
+                }
+            }catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
+           
         }
 
         public decimal GetRevenueForDay(DateTime day)
@@ -86,13 +95,26 @@ namespace Kapainha.Services
 
         public void UpdateBooking(int id, BookingCreateDto bookingCreateDto)
         {
-            var booking = BookingMappers.CreateToBooking(bookingCreateDto);
-            booking.BookingId = id;
-            booking.Services.Select(bs => bs.BookingId = booking.BookingId);
-            _repository.Update(booking);
+            var existingBooking = _repository.GetById(id);
+            if (existingBooking == null)
+                throw new KeyNotFoundException($"Booking with id {id} not found.");
+
+            // Atualizar propriedades simples
+            existingBooking.Price = bookingCreateDto.Price;
+            existingBooking.UserId = bookingCreateDto.UserId;
+            existingBooking.ActivationDate = DateTime.Now.Date;
+
+            // Atualizar serviços
+            existingBooking.Services = bookingCreateDto.Services.Select(serviceDto =>
+            {
+                var service = BookingServiceMappers.CreateToBookingService(serviceDto);
+                service.BookingId = id;
+                return service;
+            }).ToList();
+
+            _repository.Update(existingBooking);
             _repository.Save();
         }
-
         public void UpdateBookingStatus(int id, string status)
         {
             var existingBooking = _repository.GetById(id) ?? throw new KeyNotFoundException("User not found");

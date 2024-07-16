@@ -53,6 +53,21 @@ namespace Karapinha.Services
             EnviarEmail(message);
         }
 
+        public void EnviarEmailCadastroCliente(UserCreateDto usuarioDto)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Sistema de Cadastro", SmtpUser));
+            message.To.Add(new MailboxAddress(usuarioDto.Username, usuarioDto.EmailAddress));
+            message.Subject = "Conta Ativada";
+
+            message.Body = new TextPart("plain")
+            {
+                Text = $"Olá {usuarioDto.FirstName} {usuarioDto.LastName},\n\nSua conta foi criada e deve aguardar para ativação."
+            };
+
+            EnviarEmail(message);
+        }
+
         public void EnviarEmailAtivacao(UserCreateDto usuarioDto)
         {
             var message = new MimeMessage();
@@ -62,7 +77,7 @@ namespace Karapinha.Services
 
             message.Body = new TextPart("plain")
             {
-                Text = $"Olá {usuarioDto.Username},\n\nSua conta foi ativada com sucesso. Agora você pode acessar o sistema."
+                Text = $"Olá {usuarioDto.FirstName} {usuarioDto.LastName},\n\nSua conta foi ativada com sucesso. Agora você pode acessar o sistema."
             };
 
             EnviarEmail(message);

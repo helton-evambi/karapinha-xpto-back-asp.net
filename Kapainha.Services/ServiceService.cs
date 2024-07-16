@@ -47,10 +47,17 @@ namespace Kapainha.Services
         public void DeleteService(int id)
         {
             var service = _repository.GetById(id);
-            if (service != null)
+            try
             {
-                _repository.Delete(service);
-                _repository.Save();
+                if (service != null)
+                {
+                    _repository.Delete(service);
+                    _repository.Save();
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
