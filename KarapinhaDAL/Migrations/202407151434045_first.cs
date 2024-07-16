@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class FirstMigration : DbMigration
+    public partial class first : DbMigration
     {
         public override void Up()
         {
@@ -13,7 +13,9 @@
                     {
                         BookingId = c.Int(nullable: false, identity: true),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        ActivationDate = c.DateTime(nullable: false),
                         UserId = c.Int(nullable: false),
+                        Status = c.String(),
                     })
                 .PrimaryKey(t => t.BookingId)
                 .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
@@ -53,7 +55,7 @@
                         CategoryId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ProfessionalId)
-                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
+                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: false)
                 .Index(t => t.CategoryId);
             
             CreateTable(
@@ -82,7 +84,7 @@
                         CategoryId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ServiceId)
-                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: false)
+                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
                 .Index(t => t.CategoryId);
             
             CreateTable(
